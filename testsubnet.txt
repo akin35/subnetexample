@@ -1,0 +1,128 @@
+Create the CoreServicesVnet virtual network
+1.	In Azure Cloud Shell, run the following command to create the CoreServicesVnet virtual network:
+az network vnet create \
+    --resource-group [sandbox resource group name] \
+    --name CoreServicesVnet \
+    --address-prefixes 10.20.0.0/16 \
+    --location westus
+
+2.	Now, let's create the subnets that we need for the planned resources in the virtual network:
+
+
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name CoreServicesVnet \
+    --name GatewaySubnet \
+    --address-prefixes 10.20.0.0/27
+
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name CoreServicesVnet \
+    --name SharedServicesSubnet \
+    --address-prefixes 10.20.10.0/24
+
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name CoreServicesVnet \
+    --name DatabaseSubnet \
+    --address-prefixes 10.20.20.0/24
+
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name CoreServicesVnet \
+    --name PublicWebServiceSubnet \
+    --address-prefixes 10.20.30.0/24
+
+3.	Let's take a look at what we've created. Run this command to show all the subnets that we configured:
+
+az network vnet subnet list \
+    --resource-group [sandbox resource group name] \
+    --vnet-name CoreServicesVnet \
+    --output table
+You should see the following subnets listed:
+
+AddressPrefix    Name                    PrivateEndpointNetworkPolicies    PrivateLinkServiceNetworkPolicies    ProvisioningState    ResourceGroup
+---------------  ----------------------  --------------------------------  -----------------------------------  -------------------  -------------------------------------------
+10.20.0.0/27     GatewaySubnet           Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+10.20.10.0/24    SharedServicesSubnet    Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+10.20.20.0/24    DatabaseSubnet          Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+10.20.30.0/24    PublicWebServiceSubnet  Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+
+Create the ManufacturingVnet virtual network
+
+1.	In Cloud Shell, run the following command to create the ManufacturingVnet virtual network:
+az network vnet create \
+    --resource-group [sandbox resource group name] \
+    --name ManufacturingVnet \
+    --address-prefixes 10.30.0.0/16 \
+    --location northeurope
+
+2.	Now, let's create the subnets that we need for the planned resources in the virtual network:
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name ManufacturingVnet \
+    --name ManufacturingSystemSubnet \
+    --address-prefixes 10.30.10.0/24
+
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name ManufacturingVnet \
+    --name SensorSubnet1 \
+    --address-prefixes 10.30.20.0/24
+
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name ManufacturingVnet \
+    --name SensorSubnet2 \
+    --address-prefixes 10.30.21.0/24
+
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name ManufacturingVnet \
+    --name SensorSubnet3 \
+    --address-prefixes 10.30.22.0/24
+
+3.	Let's take a look at what we've created. Run this command to show all the subnets that we configured:
+az network vnet subnet list \
+    --resource-group [sandbox resource group name] \
+    --vnet-name ManufacturingVnet \
+    --output table
+
+You should see the following subnets listed:
+
+
+
+AddressPrefix    Name                       PrivateEndpointNetworkPolicies    PrivateLinkServiceNetworkPolicies    ProvisioningState    ResourceGroup
+---------------  -------------------------  --------------------------------  -----------------------------------  -------------------  -------------------------------------------
+10.30.10.0/24    ManufacturingSystemSubnet  Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+10.30.20.0/24    SensorSubnet1              Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+10.30.21.0/24    SensorSubnet2              Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+10.30.22.0/24    SensorSubnet3              Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+
+Create the ResearchVnet virtual network
+1.	In Cloud Shell, run the following command to create the ResearchVnet virtual network:
+az network vnet create \
+    --resource-group [sandbox resource group name] \
+    --name ResearchVnet \
+    --address-prefixes 10.40.40.0/24 \
+    --location westindia
+
+2.	Now, let's create the subnets that we need for the planned resources in the virtual network:
+az network vnet subnet create \
+    --resource-group [sandbox resource group name] \
+    --vnet-name ResearchVnet \
+    --name ResearchSystemSubnet \
+    --address-prefixes 10.40.40.0/24
+
+3.	Let's take a look at the final virtual network. Run this command to show all the subnets that we configured:
+az network vnet subnet list \
+    --resource-group [sandbox resource group name] \
+    --vnet-name ResearchVnet \
+    --output table
+You should see the following subnets listed: 
+
+AddressPrefix    Name                  PrivateEndpointNetworkPolicies    PrivateLinkServiceNetworkPolicies    ProvisioningState    ResourceGroup
+---------------  --------------------  --------------------------------  -----------------------------------  -------------------  -------------------------------------------
+10.40.40.0/24    ResearchSystemSubnet  Enabled                           Enabled                              Succeeded            [sandbox resource group name]
+
+
